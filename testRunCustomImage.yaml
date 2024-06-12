@@ -1,0 +1,17 @@
+# k6-resource-with-extensions.yml
+
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: k6-sample-with-extensions
+spec:
+  parallelism: 2
+  script:
+    configMap:
+      name: "test-k6"
+      file: "mainTest.js"
+  runner:
+    image: localhost:32000/k6-extended-influxdb:1.0.0
+    env:
+      - name: K6_OUT
+        value: xk6-influxdb=http://influxdb.influxdb.svc.cluster.local:8086/k6

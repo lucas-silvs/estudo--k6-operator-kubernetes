@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+  namespace: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb:1.8
+          ports:
+            - containerPort: 8086
+          volumeMounts:
+            - name: influxdb-storage
+              mountPath: /var/lib/influxdb
+          env:
+            - name: INFLUXDB_DB
+              value: mydb
+            - name: INFLUXDB_USER
+              value: admin
+            - name: INFLUXDB_USER_PASSWORD
+              value: admin123
+      volumes:
+        - name: influxdb-storage
+          persistentVolumeClaim:
+            claimName: influxdb-pvc

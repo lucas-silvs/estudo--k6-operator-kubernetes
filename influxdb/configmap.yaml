@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: influxdb-config
+  namespace: influxdb
+data:
+  influxdb.conf: |
+    [meta]
+      dir = "/var/lib/influxdb/meta"
+    [data]
+      dir = "/var/lib/influxdb/data"
+      wal-dir = "/var/lib/influxdb/wal"
+    [http]
+      bind-address = ":8086"
+      auth-enabled = false
