@@ -4,6 +4,7 @@ apiVersion: k6.io/v1alpha1
 kind: TestRun
 metadata:
   name: k6-sample-with-extensions
+  namespace: test-k6
 spec:
   parallelism: 2
   script:
