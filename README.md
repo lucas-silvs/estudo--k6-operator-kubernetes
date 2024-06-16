@@ -41,11 +41,11 @@ kubectl apply -f testRun.yaml
 
 Pronto, será criado jobs no cluster kubernetes, baseado na quantidade de paralelismo que foi definido:
 
-![jobs-k6](/imgs/jobs-k6.png)
+![jobs-k6](./imgs/jobs-k6.png)
 
 Após o job encerrar, é possivel ver pelo log do job o resultado do teste:
 
-![jobs-result-k6](/imgs/test-job-result-k6.png)
+![jobs-result-k6](./imgs/test-job-result-k6.png)
 
 ## Exportando Teste para o Grafana
 
@@ -159,6 +159,20 @@ kubectl apply -f testRunCustomImage.yaml
 Pronto, com o teste iniciado, ao acessar o Dashboardo o Grafana, irá ver que as métricas irão aparecer conforme o teste é realizado:
 
 ![grafana-test-result](./imgs/grafana-k6.png)
+
+## Limpeza do ambiente após o teste
+
+Após o teste e a captura das métricas, deve ser realizado a limpeza dos artefatos criados no kubernetes, removendo os jobs do K6 e o ConfigMap que contém o script de teste. Para a limpeza deve executar o comando a seguir:
+
+```sh
+#Deleta script de teste
+kubectl delete -f testRunCustomImage.yaml
+
+#Deleta ConfigMap
+kubectl delete configmap test-k6 -n test-k6
+```
+
+A limpeza garante que os recursos utilizados durante o testes sejam disponibilizados para que seja utilizada por outras aplicações no cluster kubernetes.
 
 ## Referencias
 
