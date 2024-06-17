@@ -31,7 +31,7 @@ Para esse teste será utilizado o ConfigMap, sendo apenas necessário executar o
 kubectl create configmap test-k6 -n test-k6 --from-file ./k6/mainTest.js
 ```
 
-## Executando teste Teste
+## Executando Teste
 
 Para executar o teste, é necessário criar uma artefato Kubernetes que é definido as configurações do teste de carga no Kubernetes, utilizando o ApiVersion `k6.io/v1alpha1`, nesse arquivo será configurado o paralelismo de jobs do teste que será criado e qual o ConfigMap que deve ser carregado. A seguir está o comando para a criação do artefato:
 
@@ -164,7 +164,7 @@ Pronto, com o teste iniciado, ao acessar o Dashboardo o Grafana, irá ver que as
 
 Após o teste e a captura das métricas, deve ser realizado a limpeza dos artefatos criados no kubernetes, removendo os jobs do K6 e o ConfigMap que contém o script de teste. Para a limpeza deve executar o comando a seguir:
 
-```sh
+```bash
 #Deleta script de teste
 kubectl delete -f testRunCustomImage.yaml
 
